@@ -21,18 +21,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: ticket-helper/package-lock.json
 
       - name: Install dependencies
-        run: cd ticket-helper && (npm ci || npm install)
+        run: |
+          cd ticket-helper
+          npm install --no-audit --no-fund --prefer-offline
 
-      - name: Build
-        run: cd ticket-helper && npm run build
+      - name: Build site
+        run: |
+          cd ticket-helper
+          npm run build
         env:
           NODE_ENV: production
 
@@ -41,7 +43,7 @@ jobs:
         with:
           static_site_generator: vite
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./ticket-helper/dist
