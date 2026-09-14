@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>追星抢票助手 - 演唱会票务导航</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#FFF9F4" />
+    <script>
+      // GitHub Pages SPA Router fallback
+      // 将 /xxx/yyy?a=b 重写为 /?p=/xxx/yyy&a=b 交给 index.html 里的 React Router
+      (function () {
+        var redirect = sessionStorage.getItem('spa-redirect');
+        if (redirect) {
+          sessionStorage.removeItem('spa-redirect');
+          location.replace(redirect);
+          return;
+        }
+        var search = location.search.slice(1);
+        var q = search ? '&' + search : '';
+        var redirectTo =
+          location.pathname.split('/').reduce(function (acc) { return acc + '../'; }, '.') +
+          'index.html?p=' +
+          encodeURIComponent(location.pathname) +
+          q;
+        sessionStorage.setItem('spa-redirect', location.pathname + location.search + location.hash);
+        location.replace(redirectTo);
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=./index.html" />
+    </noscript>
+  </head>
+  <body style="background:#FFF9F4;color:#5C4A3D;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,PingFang SC,Microsoft YaHei">
+    <div style="max-width:640px;margin:15vh auto 0; padding:32px 24px; text-align:center">
+      <h1 style="font-size:22px;margin:0 0 12px">🎫 追星抢票助手</h1>
+      <p style="font-size:14px;line-height:1.8;margin:0 0 24px;opacity:0.8">
+        如果您在 5 秒内未自动跳转，请<a href="./index.html" style="color:#E87A58;font-weight:600">点击这里</a>回到首页。
+      </p>
+      <p style="font-size:12px;opacity:0.6">本页用于 GitHub Pages 子路由 404 时的兜底重定向。</p>
+    </div>
+  </body>
+</html>

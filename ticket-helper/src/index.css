@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-bg-cream text-text-primary font-sans antialiased min-h-screen;
+    background: 
+      radial-gradient(ellipse 90% 60% at 50% -10%, rgba(244, 165, 184, 0.22), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 100% 10%, rgba(184, 169, 224, 0.20), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 0% 100%, rgba(159, 197, 232, 0.18), transparent 70%),
+      radial-gradient(ellipse 50% 35% at 90% 100%, rgba(168, 213, 186, 0.15), transparent 70%),
+      #FFF9F4;
+    background-attachment: fixed;
+  }
+  
+  ::selection {
+    background: rgba(244, 165, 184, 0.35);
+    color: #4A4A5C;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-macaron-rose/60 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-macaron-pink;
+  }
+}
+
+@layer components {
+  /* 马卡龙渐变文字：柔和低饱和三色 */
+  .gradient-text {
+    @apply bg-gradient-to-r from-macaron-pink via-macaron-purple to-macaron-blue bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradientSoft 6s ease infinite;
+  }
+  
+  /* 马卡龙卡片：纯白 + 极柔阴影 + 浅粉边，不再是深色玻璃态 */
+  .card-glass {
+    @apply bg-bg-card border border-border-soft rounded-3xl shadow-card-soft;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:bg-bg-card-hover hover:border-macaron-pink/40 
+           hover:shadow-macaron hover:-translate-y-1;
+  }
+  
+  /* 主按钮：樱花粉→香芋紫 柔和渐变 */
+  .btn-primary {
+    @apply bg-gradient-to-r from-macaron-pink via-macaron-rose to-macaron-purple 
+           text-white font-semibold px-6 py-3 rounded-2xl 
+           transition-all duration-300 
+           hover:shadow-macaron hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98];
+  }
+  
+  /* 次按钮：白色浅边，悬停粉边 */
+  .btn-secondary {
+    @apply bg-bg-card border border-border-soft text-text-primary font-medium px-5 py-2.5 rounded-2xl
+           transition-all duration-300 hover:border-macaron-pink/50 hover:bg-macaron-pink/5;
+  }
+  
+  /* 标签：统一圆角 + 马卡龙底色 */
+  .tag {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+  
+  /* 输入框：奶白背景 + 柔边 + 粉紫聚焦 */
+  .input-base {
+    @apply w-full bg-white border border-border-soft rounded-2xl px-4 py-3 text-text-primary
+           placeholder:text-text-muted focus:outline-none focus:border-macaron-pink
+           focus:ring-4 focus:ring-macaron-pink/15 transition-all duration-200;
+  }
+  
+  .section-title {
+    @apply text-xl md:text-2xl font-bold text-text-primary mb-4 flex items-center gap-2;
+  }
+  
+  .safe-bottom {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0) + 1rem);
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* 数据实时性提示条 */
+  .data-notice {
+    @apply bg-gradient-to-r from-macaron-yellow/30 via-macaron-orange/25 to-macaron-pink/25 
+           border border-macaron-orange/40 text-text-secondary 
+           text-xs md:text-sm px-4 py-3 rounded-2xl;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #FDF2F5 25%, #FFF6FB 50%, #FDF2F5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
